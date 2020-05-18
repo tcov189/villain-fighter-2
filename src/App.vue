@@ -11,6 +11,8 @@
 
 <style lang="scss">
 #app {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Verdana', sans-serif;
+  background-color: #e2e2e2;
+  height: 100vh;
 }
 </style>
