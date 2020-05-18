@@ -3,7 +3,7 @@
       <nav class="nav navbar bg-dark" id="nav">
         <router-link to="/">Home</router-link>
       </nav>
-      <div class="container mt-1">
+      <div class="mt-1">
         <router-view />
       </div>
   </div>
