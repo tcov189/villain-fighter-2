@@ -1,24 +1,25 @@
 <template>
   <div class="character-card">
-
-    <div class="d-flex flex-column align-items-center">
+    <div class="character-info-container d-flex flex-column align-items-center">
       <p class="font-weight-bold h4 mb-0">{{ character.name }}</p>
       <p>{{ characterWinLoss }}</p>
       <img class="img-fluid" :src="character.image" :alt="`${character.name} image`" />
     </div>
 
-    <div class="progress mt-1">
-      <div
-        class="progress-bar"
-        role="progressbar"
-        :style="{width: `${health}%`}"
-        :aria-valuenow="health"
-        aria-valuemin="0"
-        aria-valuemax="100"
-      >{{ health }}%</div>
+    <div class="health-bar-container">
+      <div class="progress mt-1">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          :style="{width: `${health}%`}"
+          :aria-valuenow="health"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >{{ health }}%</div>
+      </div>
     </div>
 
-    <div>
+    <div class="specials-container">
       Specials left:
       <div class="d-flex justify-content-between">
         <div
@@ -30,6 +31,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
