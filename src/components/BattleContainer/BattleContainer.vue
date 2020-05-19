@@ -8,10 +8,6 @@
         <CharacterCard :character="characters.nomu" />
       </div>
     </div>
-    <div class="row">
-      Dialog
-    </div>
-
   </div>
 </template>
 
