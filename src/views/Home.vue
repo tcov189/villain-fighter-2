@@ -1,9 +1,8 @@
 <template>
-  <div>
+  <div class="container">
     <h1 class="text-center">Welcome to Villain Fighter 2!</h1>
-    <div class="container">
-      <BattleContainer />
-    </div>
+
+    <BattleContainer />
   </div>
 </template>
 

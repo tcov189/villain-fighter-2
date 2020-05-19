@@ -1,0 +1,77 @@
+<template>
+  <div class="character-card">
+
+    <div class="d-flex flex-column align-items-center">
+      <p class="font-weight-bold h4 mb-0">{{ character.name }}</p>
+      <p>{{ characterWinLoss }}</p>
+      <img class="img-fluid" :src="character.image" :alt="`${character.name} image`" />
+    </div>
+
+    <div class="progress mt-1">
+      <div
+        class="progress-bar"
+        role="progressbar"
+        :style="{width: `${health}%`}"
+        :aria-valuenow="health"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >{{ health }}%</div>
+    </div>
+
+    <div>
+      Specials left:
+      <div class="d-flex justify-content-between">
+        <div
+          class="special-icon d-flex p-1 justify-content-center"
+          v-for="(special, index) in specials"
+          :key="`special_${index}`"
+        >
+          <span aria-hidden="true" class="fas fa-bolt"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['character'],
+  data() {
+    return {
+      wins: 0,
+      losses: 0,
+      health: 100,
+      specials: this.character.specials,
+    };
+  },
+  computed: {
+    characterWinLoss() {
+      return `${this.wins} - ${this.losses}`;
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.special-icon {
+  border: 1px solid black;
+  background-color: blue;
+  color: white;
+  flex-basis: 26px;
+  font-weight: bold;
+}
+
+img {
+  max-height: 300px;
+}
+
+.progress {
+  border-radius: 0%;
+  height: 30px;
+  background-color: #cecccc;
+
+  .progress-bar {
+    background-color: green
+  }
+}
+</style>
