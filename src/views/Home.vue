@@ -4,8 +4,12 @@
 
     <BattleContainer />
 
-    <section id="dialog" class="d-flex justify-content-center border border-dark my-2 py-4">
-      <button class="btn btn-success" v-if="!gameStarted">Start New Game</button>
+    <section id="dialog" class="my-2 py-4">
+      <div class="d-flex justify-content-center" v-if="!gameStarted">
+        <button class="btn btn-success"
+          @click="gameStarted = !gameStarted"
+          >Start New Game</button>
+      </div>
 
       <PlayerActions v-else />
     </section>
@@ -14,11 +18,13 @@
 
 <script>
 import BattleContainer from '@/components/BattleContainer/BattleContainer.vue';
+import PlayerActions from '@/components/PlayerActions.vue';
 
 export default {
   name: 'Home',
   components: {
     BattleContainer,
+    PlayerActions,
   },
   data() {
     return {
@@ -30,6 +36,7 @@ export default {
 
 <style lang="scss" scoped>
 #dialog {
-  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 3px 6px #ccc;
 }
 </style>
