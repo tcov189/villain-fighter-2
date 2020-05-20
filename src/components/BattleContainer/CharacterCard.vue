@@ -11,11 +11,11 @@
         <div
           class="progress-bar"
           role="progressbar"
-          :style="{width: `${health}%`}"
-          :aria-valuenow="health"
+          :style="{width: `${character.health}%`}"
+          :aria-valuenow="character.health"
           aria-valuemin="0"
           aria-valuemax="100"
-        >{{ health }}%</div>
+        >{{ character.health }}%</div>
       </div>
     </div>
 
@@ -42,7 +42,6 @@ export default {
     return {
       wins: 0,
       losses: 0,
-      health: 100,
       specials: this.character.specials,
     };
   },

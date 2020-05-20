@@ -15,24 +15,11 @@
 import CharacterCard from './CharacterCard.vue';
 
 export default {
+  props: [
+    'characters',
+  ],
   components: {
     CharacterCard,
-  },
-  data() {
-    return {
-      characters: {
-        all_might: {
-          name: 'All Might',
-          specials: 1,
-          image: '/img/characters/all-might.png',
-        },
-        nomu: {
-          name: 'Nomu',
-          specials: 1,
-          image: '/img/characters/nomu-usj.png',
-        },
-      },
-    };
   },
 };
 </script>

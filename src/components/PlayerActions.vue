@@ -21,7 +21,35 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: [
+    'playerSpecials',
+  ],
+  methods: {
+    attack() {
+      const damage = this.calculateDamage(5, 12);
+
+      this.$emit('player-attacks', damage);
+    },
+    specialAttack() {
+      const damage = this.calculateDamage(17, 25);
+
+      this.$emit('player-special-attacks', damage);
+    },
+    heal() {
+      this.$emit('player-heals');
+    },
+    giveUp() {
+      this.$emit('player-gives-up');
+    },
+    calculateDamage(min, max) {
+      const isCrit = Math.max(Math.floor(Math.random() * 10 + 1), 1) === 1;
+      const damage = Math.max(Math.floor(Math.random() * max) + 1, min);
+
+      return isCrit ? Math.ceil(max * 1.5) : damage;
+    },
+  },
+};
 </script>
 
 <style>

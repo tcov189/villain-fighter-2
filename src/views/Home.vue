@@ -2,7 +2,7 @@
   <div class="container">
     <h1 class="text-center">Welcome to Villain Fighter 2!</h1>
 
-    <BattleContainer />
+    <BattleContainer :characters="characters" />
 
     <section id="dialog" class="my-2 py-4">
       <div class="d-flex justify-content-center" v-if="!gameStarted">
@@ -11,13 +11,22 @@
           >Start New Game</button>
       </div>
 
-      <PlayerActions v-else />
+      <PlayerActions v-else
+        :player-specials="this.characters.all_might.specials"
+        @player-attacks="playerAttacked"
+        @player-special-attacks="playerSpecialAttacked"
+        @player-heals="playerHeals"
+        @player-gives-up="playerGivesUp"
+      />
     </section>
+
+    <BattleLogs v-if="gameStarted" />
   </div>
 </template>
 
 <script>
 import BattleContainer from '@/components/BattleContainer/BattleContainer.vue';
+import BattleLogs from '@/components/BattleLogs.vue';
 import PlayerActions from '@/components/PlayerActions.vue';
 
 export default {
@@ -25,11 +34,48 @@ export default {
   components: {
     BattleContainer,
     PlayerActions,
+    BattleLogs,
   },
   data() {
     return {
       gameStarted: false,
+      characters: {
+        all_might: {
+          name: 'All Might',
+          specials: 1,
+          image: '/img/characters/all-might.png',
+          health: 100,
+        },
+        nomu: {
+          name: 'Nomu',
+          specials: 1,
+          image: '/img/characters/nomu-usj.png',
+          health: 100,
+        },
+      },
     };
+  },
+  methods: {
+    playerAttacked(damage) {
+      if (this.characters.nomu.health - damage > 0) {
+        this.characters.nomu.health -= damage;
+      } else {
+        this.characters.nomu.health = 0;
+      }
+    },
+    playerSpecialAttacked(damage) {
+      this.playerAttacked(damage);
+
+      this.characters.all_might.specials -= 1;
+    },
+    playerHeals() {
+      if (this.characters.all_might.health !== 100) {
+        this.characters.all_might.health += 10;
+      }
+    },
+    playerGivesUp() {
+      console.log('player gives');
+    },
   },
 };
 </script>
