@@ -53,20 +53,31 @@ export default {
           health: 100,
         },
       },
+      test: null,
     };
   },
   methods: {
-    playerAttacked(damage) {
+    playerAttacked(damage, wasACrit, villanDamage) {
       if (this.characters.nomu.health - damage > 0) {
         this.characters.nomu.health -= damage;
       } else {
         this.characters.nomu.health = 0;
       }
+
+      if (this.characters.all_might.health - villanDamage > 0) {
+        this.characters.all_might.health -= villanDamage;
+      } else {
+        this.characters.all_might.health = 0;
+      }
+
+      this.test = wasACrit;
     },
-    playerSpecialAttacked(damage) {
+    playerSpecialAttacked(damage, wasACrit) {
       this.playerAttacked(damage);
 
       this.characters.all_might.specials -= 1;
+
+      this.test = wasACrit;
     },
     playerHeals() {
       if (this.characters.all_might.health !== 100) {
@@ -74,7 +85,7 @@ export default {
       }
     },
     playerGivesUp() {
-      console.log('player gives');
+
     },
   },
 };

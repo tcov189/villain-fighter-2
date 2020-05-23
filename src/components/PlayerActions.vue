@@ -30,16 +30,23 @@ export default {
   props: [
     'playerSpecials',
   ],
+  data() {
+    return {
+      hitWasACrit: false,
+    };
+  },
   methods: {
     attack() {
       const damage = this.calculateDamage(5, 12);
+      const villianDamage = this.calculateDamage(5, 12);
 
-      this.$emit('player-attacks', damage);
+      this.$emit('player-attacks', damage, this.hitWasACrit, villianDamage);
     },
     specialAttack() {
       const damage = this.calculateDamage(17, 25);
+      const villianDamage = this.calculateDamage(5, 12);
 
-      this.$emit('player-special-attacks', damage);
+      this.$emit('player-special-attacks', damage, this.hitWasACrit, villianDamage);
     },
     heal() {
       this.$emit('player-heals');
@@ -48,11 +55,11 @@ export default {
       this.$emit('player-gives-up');
     },
     calculateDamage(min, max) {
-      const isCrit = Math.floor(Math.random() * 10 + 1) === 1;
+      this.hitWasACrit = Math.floor(Math.random() * 10 + 1) === 1;
 
       const damage = Math.max(Math.floor(Math.random() * max + 1), min);
 
-      return isCrit ? Math.ceil(max * 1.5) : damage;
+      return this.hitWasACrit ? Math.ceil(max * 1.5) : damage;
     },
   },
 };
