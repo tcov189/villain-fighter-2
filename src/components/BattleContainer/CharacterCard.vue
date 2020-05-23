@@ -11,7 +11,11 @@
         <div
           class="progress-bar"
           role="progressbar"
-          :style="{width: `${character.health}%`}"
+          :style="{
+              width: `${character.health}%`,
+              backgroundColor: healthBarColor,
+              color: healthBarTextColor
+          }"
           :aria-valuenow="character.health"
           aria-valuemin="0"
           aria-valuemax="100"
@@ -48,6 +52,25 @@ export default {
   computed: {
     characterWinLoss() {
       return `${this.wins} - ${this.losses}`;
+    },
+    healthBarColor() {
+      let color = 'green';
+      if (this.character.health <= 40 && this.character.health > 20) {
+        color = 'yellow';
+      } else if (this.character.health <= 20) {
+        color = 'red';
+      }
+      return color;
+    },
+    healthBarTextColor() {
+      let color = 'white';
+
+      if (this.character.health <= 40 && this.character.health > 20) {
+        color = 'black';
+      } else if (this.character.health <= 20) {
+        color = 'white';
+      }
+      return color;
     },
   },
 };
