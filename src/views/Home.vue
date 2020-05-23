@@ -72,8 +72,8 @@ export default {
 
       this.test = wasACrit;
     },
-    playerSpecialAttacked(damage, wasACrit) {
-      this.playerAttacked(damage);
+    playerSpecialAttacked(damage, wasACrit, villanDamage) {
+      this.playerAttacked(damage, wasACrit, villanDamage);
 
       this.characters.all_might.specials -= 1;
 
