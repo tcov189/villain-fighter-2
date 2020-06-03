@@ -42,16 +42,9 @@
 <script>
 export default {
   props: ['character'],
-  data() {
-    return {
-      wins: 0,
-      losses: 0,
-      specials: this.character.specials,
-    };
-  },
   computed: {
     characterWinLoss() {
-      return `${this.wins} - ${this.losses}`;
+      return `${this.character.wins} - ${this.character.losses}`;
     },
     healthBarColor() {
       let color = 'green';
@@ -71,6 +64,9 @@ export default {
         color = 'white';
       }
       return color;
+    },
+    specials() {
+      return this.character.specials;
     },
   },
 };

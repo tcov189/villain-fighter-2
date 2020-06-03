@@ -8,18 +8,23 @@
         <CharacterCard :character="characters.nomu" />
       </div>
     </div>
+
+    <SpecialAttackModal :img-src="imageSrc" />
   </div>
 </template>
 
 <script>
 import CharacterCard from './CharacterCard.vue';
+import SpecialAttackModal from './SpecialAttackModal.vue';
 
 export default {
   props: [
     'characters',
+    'imageSrc',
   ],
   components: {
     CharacterCard,
+    SpecialAttackModal,
   },
 };
 </script>

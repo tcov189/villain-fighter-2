@@ -1,38 +1,51 @@
 <template>
   <div class="d-flex justify-content-around">
+    <template v-if="showBattleActions">
+      <button @click="attack" class="btn btn-danger" id="attack">
+        <i class="fas fa-fist-raised"></i>&nbsp;Attack
+      </button>
 
-    <button @click="attack" class="btn btn-danger" id="attack">
-      <i class="fas fa-fist-raised"></i>&nbsp;Attack
-    </button>
+      <button
+        @click="specialAttack"
+        v-if="playerSpecials > 0"
+        class="btn btn-info"
+        id="special-attack"
+      >
+        <i class="fas fa-bolt"></i>&nbsp;Special Attack
+      </button>
 
-    <button
-      @click="specialAttack"
-      v-if="playerSpecials > 0"
-      class="btn btn-info"
-      id="special-attack"
-    >
-      <i class="fas fa-bolt"></i>&nbsp;Special Attack
-    </button>
+      <button @click="heal" class="btn btn-success" id="heal">
+        <i class="fas fa-plus-square"></i>&nbsp;Heal
+      </button>
 
-    <button @click="heal" class="btn btn-success" id="heal">
-      <i class="fas fa-plus-square"></i>&nbsp;Heal
-    </button>
-
-    <button @click="giveUp" class="btn btn-secondary" id="give-up">
-      <i class="fas fa-sad-tear"></i>&nbsp;Give Up
-    </button>
-
+      <button
+        @click="showBattleActions = !showBattleActions"
+        class="btn btn-secondary"
+        id="give-up"
+      >
+        <i class="fas fa-sad-tear"></i>&nbsp;Give Up
+      </button>
+    </template>
+    <template v-else>
+      <div class="d-flex flex-column">
+        <p>Do you want to give up?</p>
+        <div class="d-flex justify-content-between">
+          <button
+            class="btn btn-primary" @click="showBattleActions = !showBattleActions">NO!</button>
+          <button class="btn btn-secondary" @click="playerGivesUp">yeah :'(</button>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
 export default {
-  props: [
-    'playerSpecials',
-  ],
+  props: ['playerSpecials'],
   data() {
     return {
       hitWasACrit: false,
+      showBattleActions: true,
     };
   },
   methods: {
@@ -46,12 +59,19 @@ export default {
       const damage = this.calculateDamage(17, 25);
       const villianDamage = this.calculateDamage(5, 12);
 
-      this.$emit('player-special-attacks', damage, this.hitWasACrit, villianDamage);
+      this.$emit(
+        'player-special-attacks',
+        damage,
+        this.hitWasACrit,
+        villianDamage,
+      );
     },
     heal() {
-      this.$emit('player-heals');
+      const villianDamage = this.calculateDamage(5, 12);
+      this.$emit('player-heals', villianDamage);
     },
-    giveUp() {
+    playerGivesUp() {
+      this.showBattleActions = true;
       this.$emit('player-gives-up');
     },
     calculateDamage(min, max) {
