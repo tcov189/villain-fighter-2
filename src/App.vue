@@ -1,14 +1,18 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-    </div>
-    <router-view/>
+      <nav class="nav navbar bg-dark d-none" id="nav">
+        <router-link to="/">Home</router-link>
+      </nav>
+      <div class="mt-1">
+        <router-view />
+      </div>
   </div>
 </template>
 
 <style lang="scss">
 #app {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Verdana', sans-serif;
+  background-color: #e2e2e2;
+  height: 100vh;
 }
 </style>
