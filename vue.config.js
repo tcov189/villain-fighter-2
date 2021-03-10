@@ -1,3 +1,5 @@
 module.exports = {
-  publicPath: '/villian-fighter-2'
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/villain-fighter-2/'
+    : '/'
 }
